@@ -1,0 +1,42 @@
+{
+  "name": "nodejs-api",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "npm run link && node app/server.js",
+    "start-cluster": "npm run link && ./node_modules/.bin/pm2-runtime start ecosystem.config.js",
+    "dev:help": "nodemon -h",
+    "test": "PORT=3000 NODE_ENV=test nyc --all --reporter=lcov --reporter=text-summary mocha --recursive app/**/*.test.js --timeout 2500000 --exit",
+    "link": "cd node_modules && ln -nsf ../app",
+    "migrate:up": "npx knex migrate:latest --knexfile app/config/knexfile.js",
+    "migrate:down": "npx knex migrate:rollback --knexfile app/config/knexfile.js"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^4.0.0",
+    "express": "^4.16.3",
+    "firebase-admin": "^6.0.0",
+    "helmet": "^3.13.0",
+    "pm2": "^3.2.2"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.11.0",
+    "mocha": "^5.2.0",
+    "npm": "^6.4.1",
+    "nyc": "^11.8.0",
+    "supertest": "^3.1.0"
+  },
+  "applink": {
+    "app": ""
+  },
+  "nyc": {
+    "include": [
+      "app/**/*.js"
+    ]
+  }
+}

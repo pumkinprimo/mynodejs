@@ -1,0 +1,10 @@
+node_modules/
+
+.eslint*
+.gitignore
+README.md
+npm-debug.log
+
+Dockerfile
+
+.*
